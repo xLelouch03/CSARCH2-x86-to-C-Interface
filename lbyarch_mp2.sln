@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34701.34
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lbyarch_mp2", "lbyarch_mp2.vcxproj", "{175AE5A3-978F-47BE-A3CC-1993815DF703}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{175AE5A3-978F-47BE-A3CC-1993815DF703}.Debug|x64.ActiveCfg = Debug|x64
+		{175AE5A3-978F-47BE-A3CC-1993815DF703}.Debug|x64.Build.0 = Debug|x64
+		{175AE5A3-978F-47BE-A3CC-1993815DF703}.Debug|x86.ActiveCfg = Debug|Win32
+		{175AE5A3-978F-47BE-A3CC-1993815DF703}.Debug|x86.Build.0 = Debug|Win32
+		{175AE5A3-978F-47BE-A3CC-1993815DF703}.Release|x64.ActiveCfg = Release|x64
+		{175AE5A3-978F-47BE-A3CC-1993815DF703}.Release|x64.Build.0 = Release|x64
+		{175AE5A3-978F-47BE-A3CC-1993815DF703}.Release|x86.ActiveCfg = Release|Win32
+		{175AE5A3-978F-47BE-A3CC-1993815DF703}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {36AEBFC4-7183-4F50-A8DF-75E5CA657B7E}
+	EndGlobalSection
+EndGlobal
