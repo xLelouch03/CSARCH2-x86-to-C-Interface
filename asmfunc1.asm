@@ -9,23 +9,22 @@ x8664:
     mov rbp, rsp
     add rbp, 16
 
-    mov rdi, rcx     
-    mov rsi, rdx     
-    mov rdx, r8      
-    mov rcx, r9      
-
-    xorps xmm0, xmm0  
-
+    xor r10, r10
 dot_product_loop:
-    movss xmm1, [rsi]  
-    movss xmm2, [rdx]  
+    cmp r10, rcx
+    jae done
+
+    xorps xmm1, xmm1
+    xorps xmm2, xmm2
+    movss xmm1, [rdx+r10*4]
+    movss xmm2, [r8+r10*4]
     mulss xmm1, xmm2   
-    addss xmm0, xmm1   
+    addss xmm0, xmm1
 
-    add rsi, 4         
-    add rdx, 4        
-    dec rdi
-    jnz dot_product_loop
+    inc r10
+    jmp dot_product_loop
 
+done:
+    movss [r9], xmm0
     pop rbp
     ret
