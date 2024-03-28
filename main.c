@@ -15,7 +15,7 @@ void dotprod(int n, float* arr1, float* arr2, float* sdot) {
 
 int main() {
 
-    const int N = 1 << 28;
+    const int N = 1 << 20;
     const int ARRAY_BYTES = N * sizeof(int);
 
     //timer variable
@@ -33,8 +33,8 @@ int main() {
     int i;
 
     for (i = 0; i < N; i++) {
-        array1[i] = 1.0;
-        array2[i] = 2.0;
+        array1[i] = 10.0;
+        array2[i] = 10.0;
     }
     // fill the cache
     dotprod(N, array1, array2, &sdot1);
@@ -53,7 +53,7 @@ int main() {
     printf("\n");
 
     //fill the cache
-    x8664(N, array1, array2, &sdot2);
+    //x8664(N, array1, array2, &sdot2);
     begin = clock();
     for (int j = 0; j < loop; j++) {
        x8664(N, array1, array2, &sdot2);
