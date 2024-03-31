@@ -36,7 +36,8 @@ int main() {
     double c_time[2];
     double asm_time[2];
     int loop = 30;
-    int errCount = 0;
+    int errCount_C = 0;
+    int errCount_ASM = 0;
 
     array1 = (float*)malloc(N * sizeof(float));
     array2 = (float*)malloc(N * sizeof(float));
@@ -56,6 +57,7 @@ int main() {
     }
 
     printf("---------- C Function ----------\n\n");
+
     // fill the cache
     dotprod(N, array1, array2, &sdot1[0]);
 
@@ -63,9 +65,26 @@ int main() {
     begin = clock();
     for (int j = 0; j < loop; j++) {
         dotprod(N, array1, array2, &sdot1[j]);
-        printf("Dot Product is %.10f\n", sdot1[j]);
     }
     end = clock();
+
+    // Correctness check
+    for (int j = 0; j < loop - 1; j++) {
+        if (sdot1[j] != sdot1[j + 1]) {
+            printf("Error: C function has multiple results\n");
+            printf("Result 1: %.10f\n", sdot1[j]);
+            printf("Result 2: %.10f\n", sdot1[j + 1]);
+            errCount_C++;
+        };
+    }
+    if (errCount_C == 0) {
+        printf("C function exhibits no errors (All results are the same)\n");
+    } else {
+        printf("C function has %d errors\n", errCount_C);
+    }
+
+
+    printf("Dot Product is %.10f\n", sdot1[0]);
 
     time_taken = ((double)(end - begin)) * 1e3 / CLOCKS_PER_SEC;
     avg_time = time_taken / loop;
@@ -74,51 +93,39 @@ int main() {
     c_time[1] = time_taken;
 
     printf("\n\n---------- Assembly Function ----------\n\n");
+
     //fill the cache
     x8664(N, array1, array2, &sdot2[0]);
 
     begin = clock();
     for (int j = 0; j < loop; j++) {
         x8664(N, array1, array2, &sdot2[j]);
-        printf("Dot Product is %.10f\n", sdot2[j]);
     }
     end = clock();
 
-    time_taken = ((double)(end - begin)) * 1e3 / CLOCKS_PER_SEC;
-    avg_time = time_taken / loop;
-
-    asm_time[0] = avg_time;
-    asm_time[1] = time_taken;
-
-    //correctness checking
-    printf("\n---------- Correctness Checking ----------\n");
-    for (int j = 0; j < loop-1; j++) {
-        if (sdot1[j] != sdot1[j+1]) {
-			printf("Error: C function has multiple results\n");
-			printf("Result 1: %.10f\n", sdot1[j]);
-			printf("Result 2: %.10f\n", sdot1[j+1]);
-			errCount++;
-        };
-    }
-
-    if (errCount == 0) {
-        printf("C function exhibits no errors\n");
-    };
-
+    // Correctness check
     for (int j = 0; j < loop; j++) {
         if (sdot1[j] != sdot2[j]) {
             printf("Error: C and Assembly function results are not same\n");
             printf("C: %.10f\n", sdot1[j]);
             printf("Assembly: %.10f\n", sdot2[j]);
-            errCount++;
+            errCount_ASM++;
         }
     }
-    if (errCount == 0) {
-		printf("Assembly function exhibits no errors\n");
+    
+    if (errCount_ASM == 0) {
+        printf("Assembly function exhibits no errors (Result is the same with C output)\n");
+    } else {
+        printf("Assembly function has %d errors\n", errCount_ASM);
     }
-    else {
-        printf("Errors found: %d\n", errCount);
-    }
+
+    printf("Dot Product is %.10f\n", sdot2[0]);
+    
+    time_taken = ((double)(end - begin)) * 1e3 / CLOCKS_PER_SEC;
+    avg_time = time_taken / loop;
+
+    asm_time[0] = avg_time;
+    asm_time[1] = time_taken;
 
 
     printf("\n-------------Time Comparison-------------\n\n");
