@@ -10,6 +10,7 @@ x8664:
     add rbp, 16
 
     xor r10, r10
+    xorps xmm0, xmm0
 dot_product_loop:
     cmp r10, rcx
     jae done
