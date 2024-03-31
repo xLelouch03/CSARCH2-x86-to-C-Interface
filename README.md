@@ -45,7 +45,7 @@ To check for the correctness in C, we checked that the output for all the runs o
 
 To check for the correctness in ASM, we checked that each of the outputs in the runs of the ASM kernel resulted in the same output for the corresponding C kernel run (run #10 output of ASM will be compared with run #10 output of C).
 
-Note that for these screenshots, the output being shown is the output of the first run for each kernel.
+Note that for these screenshots, the output being shown is the output of the first run for each kernel. Additionally, for error checking, any errors found will be printed into the console.
 
 ### Debug Mode Outputs
 
