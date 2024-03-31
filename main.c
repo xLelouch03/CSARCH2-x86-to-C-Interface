@@ -36,6 +36,8 @@ int main() {
     int loop = 30;
     int errCount = 0;
 
+    float ans;
+
     array1 = (float*)malloc(N * sizeof(float));
     array2 = (float*)malloc(N * sizeof(float));
     sdot1 = (float*)malloc(loop * sizeof(float));
@@ -60,7 +62,8 @@ int main() {
 
     begin = clock();
     for (int j = 0; j < loop; j++) {
-        dotprod(N, array1, array2, &sdot1[j]);
+        dotprod(N, array1, array2, &ans);
+        sdot1[j] = ans;
         printf("Dot Product is %.10f\n", sdot1[j]);
     }
     end = clock();
